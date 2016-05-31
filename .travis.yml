@@ -1,6 +1,21 @@
-sudo: false
+---
 language: java
-jdk: oraclejdk7
+script: ./gradlew clean :jObbifier:assemble
 
-install:
-- ./gradlew clean :jObbifier:assemble
+os:
+    - linux
+
+jdk:
+    - openjdk7
+
+sudo: false
+deploy:
+  provider: releases
+  api_key: "${TRAVIS_TOKEN}"
+  skip_cleanup: true
+  on:
+    tags: true
+
+notifications:
+    email:
+        - root@cybikbase.com
